@@ -9,7 +9,9 @@ urllib3.disable_warnings()
 logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
     level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S'
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filename='./logs/call.log',
+    encoding='utf-8'
 )
 
 stock_url = "https://stock.xueqiu.com/v5/stock/portfolio/stock/list.json"
@@ -89,7 +91,7 @@ while True:
                 if new_symbols:
                     for stock in data_current:
                         if stock['symbol'] in new_symbols:
-                            msg = f"【{name}】新增股票信息:" + stock['symbol'] + ":" + stock['name']
+                            msg = f"【{name}】新增股票信息: " + stock['symbol'] + ":" + stock['name']
                             logging.info(msg)
                             push_deer_url = f"https://api2.pushdeer.com/message/push?pushkey=PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q&text={msg}"
                             push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
@@ -101,7 +103,7 @@ while True:
                 if removed_symbols:
                     for stock in stock_data_previous[uid]:
                         if stock['symbol'] in removed_symbols:
-                            msg = f"【{name}】删除股票信息:" + stock['symbol'] + ":" + stock['name']
+                            msg = f"【{name}】删除股票信息: " + stock['symbol'] + ":" + stock['name']
                             logging.info(msg)
                             push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
                             requests.get(push_deer_url2)
@@ -129,7 +131,7 @@ while True:
                 for cube in cube_history:
                     if cube['id'] != cube_data_previous[cube_id]:
                         for one in cube['rebalancing_histories']:
-                            msg = f"【{name}】组合调仓信息: {one['stock_symbol']}:{one['stock_name']}:{one['price']}:{one['prev_weight_adjusted']}->{one['target_weight']}%"
+                            msg = f"【{name}】组合调仓信息: {one['stock_symbol']}:{one['stock_name']}:{one['price']}: {one['prev_weight_adjusted'] if one['prev_weight_adjusted'] else 0}%->{one['target_weight']}%"
                             logging.info(msg)
                             push_deer_url = f"https://api2.pushdeer.com/message/push?pushkey=PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q&text={msg}"
                             push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
