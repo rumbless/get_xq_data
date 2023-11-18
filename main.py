@@ -10,8 +10,8 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S',
-    filename='./logs/call.log',
-    encoding='utf-8'
+    filename='call.log',
+#    encoding='utf-8'
 )
 
 stock_url = "https://stock.xueqiu.com/v5/stock/portfolio/stock/list.json"
