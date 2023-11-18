@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S',
     filename='call.log',
-#    encoding='utf-8'
+    encoding='utf-8'
 )
 
 stock_url = "https://stock.xueqiu.com/v5/stock/portfolio/stock/list.json"
@@ -34,7 +34,8 @@ cube_dict = {
     "轮回666": "ZH3292517",
     "花盆君": "ZH3125504",
     "暮烟风雨": "ZH1739131",
-    "徐富贵冲冲冲": "ZH3165213"
+    "徐富贵冲冲冲": "ZH3165213",
+    "麻省锂公": "ZH3295255"
 }
 
 session = requests.Session()
@@ -137,7 +138,7 @@ while True:
                             push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
                             push_deer_url3 = f"https://api2.pushdeer.com/message/push?pushkey=PDU25746TNdVSyL1JMuocwUTR9OQGiTyzDWrv2k0B&text={msg}"
                             requests.get(push_deer_url)
-                            if cube_id != "ZH3125504":
+                            if cube_id != "ZH3125504" and cube_id != "ZH3295255":
                                 requests.get(push_deer_url2)
                                 requests.get(push_deer_url3)
 
@@ -170,4 +171,4 @@ while True:
     #     logging.error(response.content.decode())
 
     # 等待一段时间后再次访问 API
-    time.sleep(60)
+    time.sleep(30)
