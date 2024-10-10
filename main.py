@@ -23,7 +23,7 @@ user_dict = {
     "复旦橙子橙": "3697768583",
     "Moss_LD": "3316855169",
     "robo": "5712584562",
-    # "猫猫": "9696783696"
+#    "猫猫": "9696783696"
 }
 
 cube_url = "https://xueqiu.com/cubes/rebalancing/history.json"
@@ -38,10 +38,17 @@ cube_dict = {
     # "发哥": "ZH3259218",
 }
 
+msg = ""
+push_deer_url = f"https://api2.pushdeer.com/message/push?pushkey=PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q&text={msg}"
+# liujunyu
+push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
+# a ting
+push_deer_url4 = f"https://api2.pushdeer.com/message/push?pushkey=PDU32370TzF7kDHHxbwhczlMHUvKPRCCSXX2yBWM7&text={msg}"
+
 session = requests.Session()
 session.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Cookie': "xq_a_token=129e388aa28d79525f7d34343965facf5541bca6",
+    'Cookie': "u=9696783696;xq_a_token=1913d0484930cf1575179b21e84736991edde70d",
     'cache-control': "no-cache",
 }
 
@@ -71,6 +78,7 @@ youdao_version_previous = 0
 while True:
     for name, uid in user_dict.items():
         stock_param['uid'] = uid
+        stock_param['category'] = 1
 
         response = session.get(stock_url, params=stock_param)
         if response.status_code == 200 and response.json()['data']:
@@ -85,29 +93,29 @@ while True:
             else:
                 symbols_previous = set(stock['symbol'] for stock in stock_data_previous[uid])
                 symbols_current = set(stock['symbol'] for stock in data_current)
-
                 new_symbols = symbols_current - symbols_previous
                 removed_symbols = symbols_previous - symbols_current
+                print(new_symbols, removed_symbols)
 
                 if new_symbols:
                     for stock in data_current:
                         if stock['symbol'] in new_symbols:
                             msg = f"【{name}】新增股票信息: " + stock['symbol'] + ":" + stock['name']
                             logging.info(msg)
-                            push_deer_url = f"https://api2.pushdeer.com/message/push?pushkey=PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q&text={msg}"
-                            push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
-                            push_deer_url3 = f"https://api2.pushdeer.com/message/push?pushkey=PDU25746TNdVSyL1JMuocwUTR9OQGiTyzDWrv2k0B&text={msg}"
                             requests.get(push_deer_url)
                             requests.get(push_deer_url2)
                             #requests.get(push_deer_url3)
+                            if uid == '8282709675':
+                                requests.get(push_deer_url4)
 
                 if removed_symbols:
                     for stock in stock_data_previous[uid]:
                         if stock['symbol'] in removed_symbols:
                             msg = f"【{name}】删除股票信息: " + stock['symbol'] + ":" + stock['name']
                             logging.info(msg)
-                            push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
                             requests.get(push_deer_url2)
+                            if uid == '8282709675':
+                                requests.get(push_deer_url4)
 
                 # 更新保存的数据为当前数据
                 stock_data_previous[uid] = data_current
@@ -134,13 +142,10 @@ while True:
                         for one in cube['rebalancing_histories']:
                             msg = f"【{name}】组合调仓信息: {one['stock_symbol']}:{one['stock_name']}:{one['price']}【{one['prev_weight_adjusted'] if one['prev_weight_adjusted'] else 0}%->{one['target_weight']}%】"
                             logging.info(msg)
-                            push_deer_url = f"https://api2.pushdeer.com/message/push?pushkey=PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q&text={msg}"
-                            push_deer_url2 = f"https://api2.pushdeer.com/message/push?pushkey=PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR&text={msg}"
-                            push_deer_url3 = f"https://api2.pushdeer.com/message/push?pushkey=PDU25746TNdVSyL1JMuocwUTR9OQGiTyzDWrv2k0B&text={msg}"
                             requests.get(push_deer_url)
-                            #requests.get(push_deer_url3)
                             if cube_id != "ZH3377835" and cube_id != "ZH3318860" and cube_id != "ZH1739131": 
                                 requests.get(push_deer_url2)
+                                requests.get(push_deer_url4)
 
                     else:
                         cube_data_previous[cube_id] = data_current['id']
