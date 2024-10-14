@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/data/get_xq_data/main.py", line 134, in <module>
+    data_current = cube_history[0]
+                   ~~~~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
