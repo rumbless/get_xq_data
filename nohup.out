@@ -1,5 +1,8 @@
-Traceback (most recent call last):
-  File "/data/get_xq_data/main.py", line 134, in <module>
-    data_current = cube_history[0]
-                   ~~~~~~~~~~~~^^^
-TypeError: 'NoneType' object is not subscriptable
+  File "/data/get_xq_data/main.py", line 127
+    if uid == '8282709675' or uid = '7013173046':
+                                  ^
+SyntaxError: invalid syntax
+  File "/data/get_xq_data/main.py", line 127
+    if uid == '8282709675' or uid = '7013173046':
+                                  ^
+SyntaxError: invalid syntax

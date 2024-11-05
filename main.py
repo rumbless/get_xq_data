@@ -24,6 +24,7 @@ user_dict = {
     "复旦橙子橙": "3697768583",
     "Moss_LD": "3316855169",
     "robo": "5712584562",
+    "只胡清一色": "7013173046",
     # "猫猫": "9696783696"
 }
 
@@ -34,6 +35,7 @@ cube_dict = {
     "轮回666": "ZH3292517",
     "花盆君": "ZH3377835",
     "暮烟风雨": "ZH1739131",
+    "只胡清一色": "ZH3337506",
 }
 
 push_key_dict = {
@@ -46,7 +48,7 @@ push_deer_url = "https://api2.pushdeer.com/message/push?pushkey="
 session = requests.Session()
 session.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Cookie': "u=9696783696;xq_a_token=1913d0484930cf1575179b21e84736991edde70d",
+    'Cookie': "u=9696783696;xq_a_token=2e9a942d3a1aa872ababff4336ca5b610e31fe7e",
     'cache-control': "no-cache",
 }
 
@@ -112,7 +114,7 @@ if __name__ == "__main__":
                                     if k != "ating":
                                         send_push_deer_notification(v, msg)
                                     else:
-                                        if uid == '8282709675':
+                                        if uid == '8282709675' or uid == '7013173046':
                                             send_push_deer_notification(v, msg)
 
                     if removed_symbols:
@@ -122,7 +124,7 @@ if __name__ == "__main__":
                                 logging.info(msg)
                                 send_push_deer_notification(push_key_dict['liujunyu'], msg)
                                 send_push_deer_notification(push_key_dict['me'], msg)
-                                if uid == '8282709675':
+                                if uid == '8282709675' or uid == '7013173046':
                                     send_push_deer_notification(push_key_dict['ating'], msg)
 
                     # 更新保存的数据为当前数据
@@ -146,8 +148,7 @@ if __name__ == "__main__":
                                 msg = f"【{name}】组合调仓信息: {one['stock_symbol']}:{one['stock_name']}:{one['price']}【{one['prev_weight_adjusted'] if one['prev_weight_adjusted'] else 0}%->{one['target_weight']}%】"
                                 logging.info(msg)
                                 send_push_deer_notification(push_key_dict['me'], msg)
-                                if cube_id == "ZH3292517":
-                                    send_push_deer_notification(push_key_dict['liujunyu'], msg)
+                                if cube_id == "ZH3292517" or cube_id == "ZH3337506":
                                     send_push_deer_notification(push_key_dict['ating'], msg)
 
                         else:
