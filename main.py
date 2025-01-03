@@ -20,7 +20,7 @@ stock_data_previous = {}  # 初始值为 None，表示第一次访问 API
 stock_param = {"pid": "-1", "category": "1", "size": "1000"}
 user_dict = {
     "轮回666": "8282709675",
-    "薛定谔的牛": "3639429204",
+    # "薛定谔的牛": "3639429204",
     "复旦橙子橙": "3697768583",
     "Moss_LD": "3316855169",
     "robo": "5712584562",
@@ -34,8 +34,10 @@ cube_param = {"count": 20, "page": 1}
 cube_dict = {
     "轮回666": "ZH3292517",
     "花盆君": "ZH3377835",
+    "花盆君": "ZH3394904",
     "暮烟风雨": "ZH1739131",
     "只胡清一色": "ZH3337506",
+    "板块领涨龙": "ZH3335166",
 }
 
 # 全局变量，存储文章标题
@@ -135,7 +137,7 @@ def check_updates():
         if fake_id not in global_titles:
             # 第一次访问，不发送通知
             global_titles[fake_id] = new_titles
-            logging.info(f"Initialized titles for {gzh_name}.")
+            logging.info(f"【{gzh_name}】公众号文章初始化成功")
         elif global_titles[fake_id] != new_titles:
             # 标题不相同，发送通知
             gzh_msg = f"【{gzh_name}】有文章更新【{new_titles}】!"
