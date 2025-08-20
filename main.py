@@ -25,6 +25,7 @@ user_dict = {
     "Moss_LD": "3316855169",
     "robo": "5712584562",
     "只胡清一色": "7013173046",
+    "杭州新城路": "9999782882",
     # "猫猫": "9696783696"
 }
 
@@ -32,12 +33,11 @@ cube_url = "https://xueqiu.com/cubes/rebalancing/history.json"
 cube_data_previous = {}  # 第一次访问组合API
 cube_param = {"count": 20, "page": 1}
 cube_dict = {
-    "轮回666": "ZH3292517",
-    "花盆君": "ZH3377835",
-    "花盆君": "ZH3394904",
+    "轮回666": "ZH3446148",
     "暮烟风雨": "ZH1739131",
-    "只胡清一色": "ZH3337506",
     "板块领涨龙": "ZH3335166",
+    "MooSniper2025": "ZH3428108",
+    "杭州新城路-长期价投组合": "ZH3474526",
 }
 
 # 全局变量，存储文章标题
@@ -50,14 +50,14 @@ gzh = {
 }
 
 # 请求头
-Cookie = "appmsglist_action_3885240684=card; ptcz=af37a65e6383dd175ad7d2e3d4a875121205540c385fc1ba21eea797cd3b96d8; pgv_pvid=3868357759; iip=0; _qimei_q36=; _qimei_h38=fded8356a3fe8fbc1c50b5ff02000000018102; RK=GpUgQRyXXN; pac_uid=0_97f4890689ccc; qq_domain_video_guid_verify=7f9421e3f68bb889; eas_sid=k1q7q2J0K5E7L5E957y9U3J0k7; suid=user_0_97f4890689ccc; _uetvid=c428f2e07ae911ef812d9b383187bd74; wxuin=35887555214419; ua_id=ZPCBxBjPLIA0hSQPAAAAAC5kkNXluE1p-C5WII0MjYM=; _clck=rbn39m|1|fs9|0; uuid=49b80a743576e4a6dabbc5f83c387c16; slave_bizuin=3885240684; rand_info=CAESIJVC7zIweyKc6S1alMXWN1zNA0p5iRf0Vr3YquUSaUf5; xid=1ed81e170374f1021465256db13b62eb; mm_lang=zh_CN; slave_user=gh_ded3be315838; slave_sid=RUM0eVhtbzFlWFFPd2s0XzFUeWdVMGoxbVJYcVN3bExjcDduTFpqYVNGWV9xaTZkQ0JmNW1Rd2ZHTDZIZmhmaml3YVN6WmdsQWRsdVRDVmdieVNvZFlqR18wZk1SOHdOWlhrNGFkbGd2SHNGUW5iVEN3bm9VVmlqN1pNb3ozdzJYWjZlamlrRmZSU1NwdFBW; bizuin=3885240684; data_bizuin=3885240684; data_ticket=K5hfq3E3ki1KRFkV0U2pjjRiFw1KFsDbEeKwT1TcSzHiEwYGmsXcY0aKPa/834Ce; _clsk=1r7gsgx|1735889059997|3|1|mp.weixin.qq.com/weheat-agent/payload/record; rewardsn=; wxtokenkey=777"
+Cookie = "appmsglist_action_3885240684=card; yyb_muid=20A080553A2866CF136796153B726717; ua_id=rHuXp72sOVdULoFtAAAAAGv0henUsMFi5yLLPWe5R5c=; _clck=vyw988|1|fyl|0; uuid=02c1b18cda521c4c7f86960883f84f40; wxuin=55572700156844; rand_info=CAESIKaMtzB7zGpCnVoz8OqFkRVsD0XKJ11UhH3OJGxd5hw8; slave_bizuin=3885240684; data_bizuin=3885240684; bizuin=3885240684; data_ticket=qbG/0wBGs6wvYng17VCd1QPdulaD04Y89K4eMgw5MAInS48ZasVd6Ix+xQz6eDYH; slave_sid=MU1YMm5UaUdXMk1vTGtDcWZQak5vMDcxNG9xUkRjQXQzTTJSWjdHbkVjN2h0Qk1rZmRtZEF5QWhnQkxQcUtEUTZGbEw2QlN2YnNmbFNGNHlnME51TDc3aHg2b3NCeWpFcmloQzg5bHo0TUY2SFJTaTB3ZGE5NDVLUDZwTHRJdkE4bnM3a0JyMVZtcm1IbmpC; slave_user=gh_ded3be315838; xid=1ddc420ddaf65e627e336ec63db7abcd; mm_lang=zh_CN; _clsk=1rxzzhg|1755572738409|3|1|mp.weixin.qq.com/weheat-agent/payload/record"
 headers = {
     "Cookie": Cookie,
     "User-Agent": "Mozilla/5.0 (Linux; Android 10; YAL-AL00 Build/HUAWEIYAL-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/70.0.3538.64 HuaweiBrowser/10.0.1.335 Mobile Safari/537.36"
 }
 
 # 微信公众号的token
-token = "1316911862"
+token = "784962872"
 
 # 定时访问间隔（例如，每15秒访问一次）
 INTERVAL = 15  # 15 s
@@ -72,7 +72,7 @@ push_deer_url = "https://api2.pushdeer.com/message/push?pushkey="
 session = requests.Session()
 session.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Cookie': "u=9696783696;xq_a_token=2e9a942d3a1aa872ababff4336ca5b610e31fe7e",
+    'Cookie': "u=9696783696;xq_a_token=6a2008e2dca14059d12d5a4810aa980c5824e0c2",
     'cache-control': "no-cache",
 }
 
