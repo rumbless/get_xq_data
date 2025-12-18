@@ -26,6 +26,8 @@ user_dict = {
     "robo": "5712584562",
     "只胡清一色": "7013173046",
     "杭州新城路": "9999782882",
+    "杭新价投": "6186385654",
+    "主线龙": "5675356203",
     # "猫猫": "9696783696"
 }
 
@@ -38,6 +40,9 @@ cube_dict = {
     "板块领涨龙": "ZH3335166",
     "MooSniper2025": "ZH3428108",
     "杭州新城路-长期价投组合": "ZH3474526",
+    "赛艇队长投资实盘": "ZH2057818",
+    "主线龙-周周红": "ZH3400809",
+    "杭新价投": "ZH3552364",
 }
 
 # 全局变量，存储文章标题
@@ -72,7 +77,7 @@ push_deer_url = "https://api2.pushdeer.com/message/push?pushkey="
 session = requests.Session()
 session.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Cookie': "u=9696783696;xq_a_token=6a2008e2dca14059d12d5a4810aa980c5824e0c2",
+    'Cookie': "u=9696783696;xq_a_token=7cf37d4239b032b7bdfb7011f5ca303e4110c8c7",
     'cache-control': "no-cache",
 }
 
@@ -125,6 +130,7 @@ def get_article_titles(fake_id):
         "type": "9",
     }
     response = requests.get(url, headers=headers, params=params)
+    logging.info(response.text)
     if response.status_code == 200:
         return response.json().get("app_msg_list", [])
     return []
@@ -133,18 +139,19 @@ def get_article_titles(fake_id):
 def check_updates():
     for gzh_name, fake_id in gzh.items():
         article_list = get_article_titles(fake_id)
-        new_titles = [article['title'] for article in article_list]
-        if fake_id not in global_titles:
-            # 第一次访问，不发送通知
-            global_titles[fake_id] = new_titles
-            logging.info(f"【{gzh_name}】公众号文章初始化成功")
-        elif global_titles[fake_id] != new_titles:
-            # 标题不相同，发送通知
-            gzh_msg = f"【{gzh_name}】有文章更新【{new_titles}】!"
-            global_titles[fake_id] = new_titles
-            for _, push_value in push_key_dict.items():
-                send_push_deer_notification(push_value, gzh_msg)
-            logging.info(gzh_msg)
+        if article_list:
+            new_titles = [article['title'] for article in article_list]
+            if fake_id not in global_titles:
+                # 第一次访问，不发送通知
+                global_titles[fake_id] = new_titles
+                logging.info(f"【{gzh_name}】公众号文章初始化成功")
+            elif global_titles[fake_id] != new_titles:
+                # 标题不相同，发送通知
+                gzh_msg = f"【{gzh_name}】有文章更新【{new_titles}】!"
+                global_titles[fake_id] = new_titles
+                for _, push_value in push_key_dict.items():
+                    send_push_deer_notification(push_value, gzh_msg)
+                logging.info(gzh_msg)
 
 
 if __name__ == "__main__":
@@ -172,21 +179,15 @@ if __name__ == "__main__":
                                 msg = f"【{name}】新增股票信息: " + stock['symbol'] + ":" + stock['name']
                                 logging.info(msg)
                                 for k, v in push_key_dict.items():
-                                    if k != "ating":
-                                        send_push_deer_notification(v, msg)
-                                    else:
-                                        if uid == '8282709675' or uid == '7013173046':
-                                            send_push_deer_notification(v, msg)
+                                    send_push_deer_notification(v, msg)
 
                     if removed_symbols:
                         for stock in stock_data_previous[uid]:
                             if stock['symbol'] in removed_symbols:
                                 msg = f"【{name}】删除股票信息: " + stock['symbol'] + ":" + stock['name']
                                 logging.info(msg)
-                                send_push_deer_notification(push_key_dict['liujunyu'], msg)
-                                send_push_deer_notification(push_key_dict['me'], msg)
-                                if uid == '8282709675' or uid == '7013173046':
-                                    send_push_deer_notification(push_key_dict['ating'], msg)
+                                for k, v in push_key_dict.items():
+                                    send_push_deer_notification(v, msg)
 
                     # 更新保存的数据为当前数据
                     stock_data_previous[uid] = data_current
@@ -208,15 +209,14 @@ if __name__ == "__main__":
                             for one in cube['rebalancing_histories']:
                                 msg = f"【{name}】组合调仓信息: {one['stock_symbol']}:{one['stock_name']}:{one['price']}【{one['prev_weight_adjusted'] if one['prev_weight_adjusted'] else 0}%->{one['target_weight']}%】"
                                 logging.info(msg)
-                                send_push_deer_notification(push_key_dict['me'], msg)
-                                if cube_id == "ZH3292517" or cube_id == "ZH3337506":
-                                    send_push_deer_notification(push_key_dict['ating'], msg)
+                                for k, v in push_key_dict.items():
+                                    send_push_deer_notification(v, msg)
 
                         else:
                             cube_data_previous[cube_id] = data_current['id']
                             break
 
         # 检查公众号是否更新
-        check_updates()
+        #check_updates()
         # 等待一段时间后再次访问 API
         time.sleep(INTERVAL)
