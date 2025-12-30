@@ -43,6 +43,7 @@ cube_dict = {
     "赛艇队长投资实盘": "ZH2057818",
     "主线龙-周周红": "ZH3400809",
     "杭新价投": "ZH3552364",
+    "少先队长王元鹅": "ZH3539344",
 }
 
 # 全局变量，存储文章标题
@@ -65,12 +66,12 @@ headers = {
 token = "784962872"
 
 # 定时访问间隔（例如，每15秒访问一次）
-INTERVAL = 15  # 15 s
+INTERVAL = 30  # 15 s
 
 push_key_dict = {
     "me": "PDU23078Tvl3ShDVG3aYDrCO2Eqf9azouteT6F13q",
-    "liujunyu": "PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR",
-    "ating": "PDU32370TzF7kDHHxbwhczlMHUvKPRCCSXX2yBWM7"
+#    "liujunyu": "PDU26203TfKUwbR46v1cDQpcHcVh9Ahw5heaMcgkR",
+    "ating": "PDU32370TNaHQa4x2b7GoCsOqabG6AFjqGOZb048y"
 }
 push_deer_url = "https://api2.pushdeer.com/message/push?pushkey="
 
@@ -196,6 +197,7 @@ if __name__ == "__main__":
             cube_param['cube_symbol'] = cube_id
 
             cube_history = get_cube_data(cube_id)
+            time.sleep(1)
             if cube_history:
                 data_current = cube_history[0]
                 # 第一次访问 API，保存数据到变量中
